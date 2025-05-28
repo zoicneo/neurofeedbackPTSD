@@ -58,6 +58,7 @@
         .llm-response.active { display: block; }
         .loading-spinner { border: 4px solid #f3f3f3; border-top: 4px solid #607D8B; border-radius: 50%; width: 24px; height: 24px; animation: spin 1s linear infinite; display: inline-block; vertical-align: middle; margin-left: 0.5rem; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .question-input { border: 1px solid #ccc; padding: 0.5rem; border-radius: 0.25rem; width: 100%; max-width: 400px; margin-top: 1rem; }
     </style>
 </head>
 <body class="antialiased">
@@ -97,6 +98,13 @@
             </p>
             <button class="summarize-btn bg-sky-700 hover:bg-sky-800 text-white font-semibold py-2 px-4 rounded-md mt-4 transition duration-300" data-target="understanding-nf">✨ Summarize this Section</button>
             <div id="understanding-nf-summary" class="llm-response"></div>
+
+            <div class="mt-8 pt-4 border-t border-gray-200">
+                <h3 class="text-xl font-semibold mb-3">✨ Ask a Question about PTSD or Neurofeedback</h3>
+                <input type="text" id="question-input-understanding" class="question-input" placeholder="e.g., What are the main symptoms of PTSD?">
+                <button id="ask-question-understanding-btn" class="bg-indigo-700 hover:bg-indigo-800 text-white font-semibold py-2 px-4 rounded-md mt-2 transition duration-300">Ask Question</button>
+                <div id="understanding-question-output" class="llm-response"></div>
+            </div>
         </section>
 
         <section id="modalities" class="section-card scroll-mt-20">
@@ -218,6 +226,9 @@
             <p class="text-lg mt-6">These mechanisms suggest NF addresses the underlying neurological dysregulation of PTSD, promoting lasting recovery rather than just symptom relief.</p>
             <button class="summarize-btn bg-sky-700 hover:bg-sky-800 text-white font-semibold py-2 px-4 rounded-md mt-4 transition duration-300" data-target="mechanisms">✨ Summarize this Section</button>
             <div id="mechanisms-summary" class="llm-response"></div>
+
+            <button id="explain-mechanisms-btn" class="bg-purple-700 hover:bg-purple-800 text-white font-semibold py-2 px-4 rounded-md mt-4 transition duration-300">✨ Explain in Simpler Terms</button>
+            <div id="mechanisms-simple-explanation" class="llm-response"></div>
         </section>
 
         <section id="safety" class="section-card scroll-mt-20">
@@ -576,12 +587,16 @@
                 
                 const targetLink = document.querySelector(".nav-link[href*=" + sectionId + "]");
 
-                if (targetLink) { // Add null check here
+                if (targetLink) {
                     if (sectionId === 'home' && scrollY < (document.querySelector('#understanding-nf')?.offsetTop || 200) - navHeight - 20) {
                         targetLink.classList.add("active");
-                        document.querySelectorAll(".nav-link:not([href*=" + sectionId + "])").forEach(link => link.classList.remove("active"));
+                        document.querySelectorAll(".nav-link:not([href*=" + sectionId + "])").forEach(link => {
+                            if (link) link.classList.remove("active"); // Null check for link
+                        });
                     } else if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight){
-                        document.querySelectorAll(".nav-link").forEach(link => link.classList.remove("active"));
+                        document.querySelectorAll(".nav-link").forEach(link => {
+                            if (link) link.classList.remove("active"); // Null check for link
+                        });
                         targetLink.classList.add("active");
                     } else if (sectionId !== 'home') {
                         targetLink.classList.remove("active");
@@ -589,9 +604,11 @@
                 }
             });
             if (scrollY < 50) {
-                 document.querySelectorAll(".nav-link").forEach(link => link.classList.remove("active"));
+                 document.querySelectorAll(".nav-link").forEach(link => {
+                    if (link) link.classList.remove("active"); // Null check for link
+                 });
                  const homeLink = document.querySelector(".nav-link[href*='home']");
-                 if (homeLink) { // Add null check here
+                 if (homeLink) {
                     homeLink.classList.add("active");
                  }
             }
@@ -658,17 +675,14 @@
                 if (sectionTextElement) {
                     sectionContent = sectionTextElement.innerText;
                 } else {
-                    // For sections like 'modalities' where main text is not in a single <p> with an ID
                     const sectionDiv = document.getElementById(targetSectionId);
                     if (sectionDiv) {
-                        // Get all direct text content, excluding button text and chart canvas
                         const paragraphs = sectionDiv.querySelectorAll('p');
                         paragraphs.forEach(p => {
                             if (!p.closest('.llm-response') && !p.closest('.chart-container') && !p.closest('button')) {
                                 sectionContent += p.innerText + '\n';
                             }
                         });
-                         // Also include text from list items for modalities
                         const listItems = sectionDiv.querySelectorAll('li');
                         listItems.forEach(li => {
                             sectionContent += li.innerText + '\n';
@@ -699,6 +713,40 @@
 
                 const prompt = `Based on the following text about challenges and future research in Neurofeedback for PTSD, suggest 3-5 distinct, specific, and actionable research questions. Focus on addressing the identified limitations and advancing the field. Present them as a bulleted list.\n\nContext:\n${futureSectionText}\n\nLimitations and Recommendations:\n${limitationsText.trim()}`;
                 callGeminiAPI(prompt, 'future-questions-output', generateQuestionsBtn);
+            });
+        }
+
+        // Explain in Simpler Terms for Neurological Mechanisms
+        const explainMechanismsBtn = document.getElementById('explain-mechanisms-btn');
+        if (explainMechanismsBtn) {
+            explainMechanismsBtn.addEventListener('click', () => {
+                const mechanismsTextElement = document.getElementById('mechanisms-text');
+                let fullMechanismsContent = mechanismsTextElement ? mechanismsTextElement.innerText + '\n' : '';
+                
+                document.querySelectorAll('#mechanisms .stat-box p').forEach(p => {
+                    fullMechanismsContent += p.innerText + '\n';
+                });
+
+                const prompt = `Explain the following neurological mechanisms of Neurofeedback for PTSD in simple, easy-to-understand terms, suitable for someone without a medical background. Focus on clarity and avoid jargon where possible:\n\n${fullMechanismsContent.trim()}`;
+                callGeminiAPI(prompt, 'mechanisms-simple-explanation', explainMechanismsBtn);
+            });
+        }
+
+        // Ask a Question about Understanding PTSD & Neurofeedback
+        const askQuestionUnderstandingBtn = document.getElementById('ask-question-understanding-btn');
+        const questionInputUnderstanding = document.getElementById('question-input-understanding');
+        if (askQuestionUnderstandingBtn && questionInputUnderstanding) {
+            askQuestionUnderstandingBtn.addEventListener('click', () => {
+                const userQuestion = questionInputUnderstanding.value.trim();
+                if (!userQuestion) {
+                    document.getElementById('understanding-question-output').innerHTML = '<p class="text-red-600">Please enter a question.</p>';
+                    document.getElementById('understanding-question-output').classList.add('active');
+                    return;
+                }
+
+                const understandingSectionText = document.getElementById('understanding-nf-text').innerText;
+                const prompt = `Based on the following context about PTSD and Neurofeedback, answer the user's question concisely:\n\nContext:\n${understandingSectionText}\n\nUser Question: ${userQuestion}`;
+                callGeminiAPI(prompt, 'understanding-question-output', askQuestionUnderstandingBtn);
             });
         }
     </script>
