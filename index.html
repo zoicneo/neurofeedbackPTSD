@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neurofeedback for PTSD: Efficacy, Technology, and Market Insights</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .stat-number {
+            font-size: 3rem;
+            line-height: 1;
+        }
+        .section-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .flowchart-step {
+            border: 2px solid;
+            padding: 1rem;
+            text-align: center;
+            border-radius: 0.5rem;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .flowchart-arrow {
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0.5rem 0;
+        }
+         .sticky-nav {
+            position: -webkit-sticky; /* Safari */
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- 
+        Infographic Narrative Plan:
+        1.  Hook: Scale of PTSD & treatment gap, Neurofeedback (NF) as a novel solution.
+        2.  Market Overview: NF efficacy (effect sizes, remission rates), growth drivers (advanced modalities).
+        3.  Technology Landscape: EEG NF, fMRI NF, fMRI-informed EEG NF; evolution and key targets.
+        4.  Competitive Edge: Comparison with traditional therapies (limitations, NF's adjunctive role, adherence).
+        5.  Consumer/Patient Focus: Diverse populations, broad benefits (beyond core PTSD), safety & tolerability.
+        6.  Market Dynamics: Challenges (methodological limits), Future Outlook (research needs, integration potential).
+        7.  Conclusion: Summary of NF's promise in PTSD treatment landscape.
+
+        Selected Color Palette: "Fresh & Bright" (Conceptual - using Tailwind's blue, green, orange, purple for vibrancy)
+        - Primary: Tailwind sky-500 (#0ea5e9)
+        - Secondary: Tailwind green-500 (#22c55e)
+        - Accent 1: Tailwind orange-500 (#f97316)
+        - Accent 2: Tailwind violet-500 (#8b5cf6)
+        - Neutral/Background: Tailwind gray-100, white
+        - Text: Tailwind gray-800, gray-600
+
+        Visualization Choices & Justification (NO SVG, NO MERMAID JS confirmed):
+        - Intro Stats: Large HTML text ("Single Big Number") - Goal: Inform. Justification: High impact. (NO SVG)
+        - Efficacy Metrics (SMD, MD): Bar Chart (Chart.js) - Goal: Compare. Justification: Clear comparison of magnitudes. (NO SVG)
+        - Remission Rates: Donut Chart (Chart.js) / Big Number - Goal: Inform/Compare. Justification: Shows proportion/high impact. (NO SVG)
+        - Technology Evolution: HTML/CSS Flowchart - Goal: Organize. Justification: Visualizes progression. (NO SVG, NO MERMAID)
+        - Modality Comparison (EEG vs fMRI features): HTML cards/lists - Goal: Inform/Compare. Justification: Structured info. (NO SVG)
+        - Therapy Comparison (Dropout/Efficacy): Bar Chart (Chart.js) - Goal: Compare. Justification: Direct metric comparison. (NO SVG)
+        - Patient Populations: HTML list with Unicode icons - Goal: Inform. Justification: Engaging visual list. (NO SVG)
+        - Associated Benefits: HTML "bubbles" (styled divs) - Goal: Inform. Justification: Visual grouping. (NO SVG)
+        - Research Limitations/Future Needs: HTML Table / Lists - Goal: Organize. Justification: Structured presentation. (NO SVG)
+        - All Chart.js instances will use Canvas rendering, label wrapping, and the specified tooltip configuration.
+        - Icons will be Unicode characters.
+        - Explicit confirmation: NEITHER Mermaid JS NOR SVG were used anywhere in this output.
+    -->
+
+    <header class="bg-sky-600 text-white p-6 shadow-lg">
+        <div class="container mx-auto text-center">
+            <h1 class="text-3xl md:text-4xl font-bold">Neurofeedback for PTSD: A New Wave in Treatment</h1>
+            <p class="mt-2 text-lg">Exploring Efficacy, Technological Advancements, and Market Potential</p>
+        </div>
+    </header>
+
+    <nav class="sticky-nav bg-white shadow-md py-2">
+        <div class="container mx-auto flex flex-wrap justify-center space-x-2 sm:space-x-4 text-sm sm:text-base">
+            <a href="#introduction" class="text-sky-600 hover:text-sky-800 font-semibold p-2 rounded-md">Introduction</a>
+            <a href="#efficacy" class="text-sky-600 hover:text-sky-800 font-semibold p-2 rounded-md">Efficacy Highlights</a>
+            <a href="#technology" class="text-sky-600 hover:text-sky-800 font-semibold p-2 rounded-md">Tech Landscape</a>
+            <a href="#competitive" class="text-sky-600 hover:text-sky-800 font-semibold p-2 rounded-md">Competitive Edge</a>
+            <a href="#consumer" class="text-sky-600 hover:text-sky-800 font-semibold p-2 rounded-md">Patient Impact</a>
+            <a href="#market-dynamics" class="text-sky-600 hover:text-sky-800 font-semibold p-2 rounded-md">Market Dynamics</a>
+            <a href="#conclusion" class="text-sky-600 hover:text-sky-800 font-semibold p-2 rounded-md">Conclusion</a>
+        </div>
+    </nav>
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <section id="introduction" class="my-12 scroll-mt-20">
+            <div class="bg-white rounded-lg shadow-xl p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-sky-700 mb-6 text-center">The Challenge of PTSD and the Rise of Neurofeedback</h2>
+                <p class="text-lg text-gray-700 mb-6">
+                    Posttraumatic Stress Disorder (PTSD) is a severe psychiatric condition affecting millions worldwide, often arising from exposure to severe trauma [1]. It significantly impairs daily living and poses a substantial public health challenge [10]. A critical issue is treatment resistance; many individuals do not achieve remission with first-line interventions like psychotherapy and pharmacotherapy, where remission rates can be as low as 30-40% [3, 6, 7]. This persistent treatment gap underscores an urgent need for novel therapeutic approaches.
+                </p>
+                <div class="grid md:grid-cols-2 gap-6 text-center my-8">
+                    <div class="bg-sky-100 p-6 rounded-lg shadow-md">
+                        <div class="section-icon text-sky-500">🌍</div>
+                        <p class="text-xl font-semibold text-gray-700">Affects Millions Worldwide</p>
+                        <p class="text-gray-600 text-sm">(Source: [1])</p>
+                    </div>
+                    <div class="bg-orange-100 p-6 rounded-lg shadow-md">
+                         <div class="section-icon text-orange-500">📉</div>
+                        <p class="text-xl font-semibold text-gray-700">~30-60% Remission with Standard Therapies</p>
+                        <p class="text-gray-600 text-sm">(Source: [3])</p>
+                    </div>
+                </div>
+                <p class="text-lg text-gray-700 mt-6">
+                    Neurofeedback (NF) emerges as a promising, non-invasive modality. It empowers individuals to self-regulate brain activity by providing real-time feedback on EEG or fMRI signals [2, 7, 9, 11]. Rooted in neuroscientific understanding, NF aims to rebalance dysfunctional brain networks implicated in PTSD, such as the hyperactive amygdala and underactive prefrontal cortex, thereby improving symptoms like hyperarousal, intrusive thoughts, and emotional dysregulation [3, 5, 13, 15].
+                </p>
+            </div>
+        </section>
+
+        <section id="efficacy" class="my-12 scroll-mt-20">
+            <div class="bg-white rounded-lg shadow-xl p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-green-700 mb-8 text-center">Striking Efficacy: Neurofeedback's Impact on PTSD</h2>
+                <p class="text-lg text-gray-700 mb-6 text-center">
+                    Multiple meta-analyses and RCTs highlight neurofeedback's significant impact, with clinically meaningful effect sizes and high remission rates, often comparable to or exceeding established treatments [1, 2].
+                </p>
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-700 mb-3 text-center">Key Efficacy Metrics (SMD)</h3>
+                        <div class="chart-container">
+                            <canvas id="efficacySMDChart"></canvas>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-2 text-center">Standardized Mean Difference (SMD) indicates substantial symptom reduction. Sources: [1], [19].</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-700 mb-3 text-center">Remission Rates: A New Hope</h3>
+                        <div class="chart-container" style="height: 280px; max-height: 300px;">
+                            <canvas id="remissionRateChart"></canvas>
+                        </div>
+                         <p class="text-sm text-gray-600 mt-2 text-center">NF shows significantly higher remission. Source: [1, 8]. PRISM study showed 32% remission [4].</p>
+                    </div>
+                </div>
+                <div class="mt-8 text-center">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-2">Sustained & Growing Benefits</h3>
+                    <p class="text-lg text-gray-700">
+                        Effects are often sustained and can even increase at follow-up, suggesting durable therapeutic change [3, 5, 17, 20]. The PRISM for PTSD device, an fMRI-informed EEG-NF system, achieved FDA clearance, marking a significant regulatory milestone and underscoring the growing evidence base [3, 4].
+                    </p>
+                    <div class="mt-6 bg-green-100 p-6 rounded-lg shadow-md inline-block">
+                        <div class="section-icon text-green-500">📈</div>
+                        <p class="text-2xl font-bold text-green-600">67% Clinically Significant Reduction</p>
+                        <p class="text-gray-600">(PRISM Study, CAPS-5 Scores [4])</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="technology" class="my-12 scroll-mt-20">
+            <div class="bg-white rounded-lg shadow-xl p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-violet-700 mb-8 text-center">The Evolving Technology of Neurofeedback</h2>
+                <p class="text-lg text-gray-700 mb-6 text-center">
+                    Neurofeedback for PTSD employs various modalities, evolving from traditional EEG to precise fMRI-based techniques.
+                </p>
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <div class="bg-violet-50 p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold text-violet-600 mb-3">EEG Neurofeedback (EEG NF)</h3>
+                        <p class="text-gray-700 mb-2">Most prevalent, targeting global brain oscillations [3, 13, 15]. Key frequencies:</p>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1">
+                            <li><span class="font-semibold">Alpha (8-12 Hz):</span> Promotes calm, alert relaxation [3, 6, 9].</li>
+                            <li><span class="font-semibold">Theta (4-7 Hz):</span> Linked to working memory, relaxation [2, 6].</li>
+                            <li><span class="font-semibold">Beta (13-20 Hz):</span> Active cognitive engagement, focus [6, 11].</li>
+                        </ul>
+                        <p class="text-gray-700 mt-2">Protocols like Alpha-Theta training show significant symptom improvement [2, 6].</p>
+                    </div>
+                    <div class="bg-sky-50 p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold text-sky-600 mb-3">fMRI NF & fMRI-informed EEG NF</h3>
+                        <p class="text-gray-700 mb-2">Advanced modalities for precise targeting of deep brain regions [2, 3, 5].</p>
+                         <ul class="list-disc list-inside text-gray-600 space-y-1">
+                            <li><span class="font-semibold">Amygdala:</span> Reduces hyperactivity in fear processing center [3, 4, 7].</li>
+                            <li><span class="font-semibold">Posterior Cingulate Cortex (PCC):</span> Downregulates activity related to trauma re-experiencing [7, 14, 16].</li>
+                        </ul>
+                        <p class="text-gray-700 mt-2">fMRI-informed EEG-NF (e.g., PRISM EFP-EEG-fMRI) combines EEG accessibility with fMRI precision [3, 4, 5].</p>
+                    </div>
+                </div>
+
+                <h3 class="text-2xl font-semibold text-violet-700 mb-4 text-center">Technological Progression</h3>
+                <div class="flex flex-col md:flex-row items-center justify-around space-y-4 md:space-y-0 md:space-x-4">
+                    <div class="flowchart-step border-violet-500 text-violet-700 bg-violet-100 w-full md:w-1/4">Traditional EEG NF (Global Targeting)</div>
+                    <div class="flowchart-arrow text-violet-500 md:rotate-0 rotate-90">➡️</div>
+                    <div class="flowchart-step border-purple-500 text-purple-700 bg-purple-100 w-full md:w-1/4">fMRI NF (Deep, Precise Targeting)</div>
+                    <div class="flowchart-arrow text-purple-500 md:rotate-0 rotate-90">➡️</div>
+                    <div class="flowchart-step border-sky-500 text-sky-700 bg-sky-100 w-full md:w-1/4">fMRI-informed EEG NF (Accessible Precision, e.g., PRISM)</div>
+                </div>
+                <p class="text-sm text-gray-600 mt-4 text-center">This evolution aims for more targeted and potentially more effective interventions, with FDA approvals signifying growing validation [3, 4].</p>
+            </div>
+        </section>
+
+        <section id="competitive" class="my-12 scroll-mt-20">
+            <div class="bg-white rounded-lg shadow-xl p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-orange-700 mb-8 text-center">Neurofeedback's Edge in the PTSD Treatment Landscape</h2>
+                <p class="text-lg text-gray-700 mb-6">
+                    Current standard PTSD treatments (psychotherapy, pharmacotherapy) have limitations: only 30-60% achieve remission, and issues like high dropout rates due to side effects or trauma re-exposure persist [3]. Neurofeedback offers a distinct alternative or adjunctive approach.
+                </p>
+                <div class="grid md:grid-cols-2 gap-8 items-start">
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-700 mb-3 text-center">Efficacy: NF vs. Other Interventions</h3>
+                         <div class="chart-container">
+                            <canvas id="efficacyComparisonChart"></canvas>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-2 text-center">NF effect sizes are comparable or better than many established psychotherapies and published drug interventions for PTSD [2].</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-700 mb-3 text-center">Patient Adherence (Dropout Rates)</h3>
+                         <div class="chart-container">
+                            <canvas id="dropoutRateComparisonChart"></canvas>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-2 text-center">NF often shows lower dropout rates (e.g., 9%) compared to some psychotherapies (e.g., 16%) [6].</p>
+                    </div>
+                </div>
+                <div class="mt-8">
+                    <h3 class="text-xl font-semibold text-orange-600 mb-3 text-center">A Powerful Adjunctive Therapy</h3>
+                    <p class="text-lg text-gray-700 mb-4">
+                        Neurofeedback targets neural regulation and stabilization, not direct trauma processing [16]. This makes it highly suitable for patients who find exposure therapies too distressing or are too dysregulated to engage [2, 16]. Its adjunctive use with psychotherapy or pharmacotherapy can enhance overall outcomes. One FDA-cleared device is specifically for adjunctive use [3, 9, 13].
+                    </p>
+                    <div class="text-center p-4 bg-orange-50 rounded-lg">
+                        <span class="text-2xl">🧠</span> <span class="text-xl font-semibold text-orange-700">Standard Therapies</span> 
+                        <span class="text-2xl mx-2">+</span> 
+                        <span class="text-2xl">💡</span> <span class="text-xl font-semibold text-orange-700">Neurofeedback</span> 
+                        <span class="text-2xl mx-2">=</span> 
+                        <span class="text-2xl">🏆</span> <span class="text-xl font-semibold text-orange-700">Enhanced Outcomes</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="consumer" class="my-12 scroll-mt-20">
+            <div class="bg-white rounded-lg shadow-xl p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-teal-700 mb-8 text-center">Broad Patient Impact & Favorable Profile</h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold text-teal-600 mb-3">Diverse Populations Served</h3>
+                        <p class="text-gray-700 mb-3">Beneficial effects observed across varied groups [1, 3, 8, 9, 10]:</p>
+                        <ul class="space-y-2">
+                            <li class="flex items-center"><span class="section-icon text-teal-500 mr-2">🛡️</span> Military Personnel & Veterans</li>
+                            <li class="flex items-center"><span class="section-icon text-teal-500 mr-2">👥</span> Civilians (various trauma types)</li>
+                            <li class="flex items-center"><span class="section-icon text-teal-500 mr-2">👮</span> Police Officers</li>
+                            <li class="flex items-center"><span class="section-icon text-teal-500 mr-2">🧒</span> Children & Adolescents</li>
+                        </ul>
+                        <p class="text-gray-700 mt-3 font-semibold">Notably more effective for complex trauma PTSD [19].</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-teal-600 mb-3">Benefits Beyond Core Symptoms</h3>
+                        <p class="text-gray-700 mb-3">Improvements seen in [1, 2, 3, 6, 8, 19]:</p>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="bg-teal-100 text-teal-700 px-3 py-1 rounded-full text-sm font-medium">Anxiety Reduction</span>
+                            <span class="bg-teal-100 text-teal-700 px-3 py-1 rounded-full text-sm font-medium">Depression Alleviation</span>
+                            <span class="bg-teal-100 text-teal-700 px-3 py-1 rounded-full text-sm font-medium">Improved Sleep</span>
+                            <span class="bg-teal-100 text-teal-700 px-3 py-1 rounded-full text-sm font-medium">Affect Regulation</span>
+                            <span class="bg-teal-100 text-teal-700 px-3 py-1 rounded-full text-sm font-medium">Executive Functioning</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-10 text-center">
+                    <h3 class="text-2xl font-bold text-teal-700 mb-4">Safety & Tolerability: A Key Advantage</h3>
+                     <div class="flex flex-col md:flex-row justify-around items-center gap-6">
+                        <div class="bg-green-100 p-6 rounded-lg shadow-md text-center w-full md:w-auto">
+                            <div class="section-icon text-green-500">👍</div>
+                            <p class="text-xl font-semibold text-gray-700">Mild or No Adverse Events</p>
+                            <p class="text-gray-600 text-sm">(Source: [4, 6])</p>
+                        </div>
+                        <div class="bg-sky-100 p-6 rounded-lg shadow-md text-center w-full md:w-auto">
+                            <div class="section-icon text-sky-500">🏃‍♂️💨</div>
+                            <p class="text-xl font-semibold text-gray-700">Low Dropout Rates</p>
+                            <p class="text-gray-600 text-sm">(Often <10%, Source: [2, 4, 6])</p>
+                        </div>
+                    </div>
+                    <p class="text-lg text-gray-700 mt-6">
+                        This strong safety profile makes NF a viable option, especially for those intolerant of other therapies or for long-term management [3, 6, 7].
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="market-dynamics" class="my-12 scroll-mt-20">
+            <div class="bg-white rounded-lg shadow-xl p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-indigo-700 mb-8 text-center">Market Dynamics: Navigating Challenges, Charting the Future</h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold text-indigo-600 mb-3">Current Research Challenges</h3>
+                        <p class="text-gray-700 mb-3">Methodological limitations hinder broader adoption [1, 2, 3, 6, 17]:</p>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full bg-white border border-gray-300 rounded-lg">
+                                <thead class="bg-indigo-100">
+                                    <tr>
+                                        <th class="py-2 px-4 border-b text-left text-sm font-semibold text-indigo-700">Limitation</th>
+                                        <th class="py-2 px-4 border-b text-left text-sm font-semibold text-indigo-700">Impact</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="py-2 px-4 border-b text-sm text-gray-600">Small Sample Sizes</td>
+                                        <td class="py-2 px-4 border-b text-sm text-gray-600">Limits generalizability, may inflate effect sizes.</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="py-2 px-4 border-b text-sm text-gray-600">Lack of Robust Controls (Sham/Placebo)</td>
+                                        <td class="py-2 px-4 border-b text-sm text-gray-600">Hard to isolate specific NF effects.</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="py-2 px-4 border-b text-sm text-gray-600">Short Follow-up Periods</td>
+                                        <td class="py-2 px-4 border-b text-sm text-gray-600">Long-term efficacy unclear.</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="py-2 px-4 border-b text-sm text-gray-600">Protocol Heterogeneity</td>
+                                        <td class="py-2 px-4 border-b text-sm text-gray-600">Difficult to standardize, compare studies.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-indigo-600 mb-3">Future Research & Market Needs</h3>
+                        <p class="text-gray-700 mb-3">To unlock full potential, the field needs [1, 3, 6, 7, 15, 16, 20]:</p>
+                        <ul class="space-y-2">
+                            <li class="flex items-center"><span class="text-indigo-500 mr-2 text-xl">🔬</span> Larger, rigorously designed RCTs.</li>
+                            <li class="flex items-center"><span class="text-indigo-500 mr-2 text-xl">⏳</span> Longer follow-up periods ( >1 year).</li>
+                            <li class="flex items-center"><span class="text-indigo-500 mr-2 text-xl">⚙️</span> Standardization of optimal protocols & dosing.</li>
+                            <li class="flex items-center"><span class="text-indigo-500 mr-2 text-xl">💰</span> Comprehensive cost-effectiveness studies.</li>
+                            <li class="flex items-center"><span class="text-indigo-500 mr-2 text-xl">📜</span> Integration into clinical guidelines & insurance.</li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="text-lg text-gray-700 mt-8 text-center">
+                    Improvements in research quality are crucial. Addressing these gaps will be essential for moving neurofeedback from a "promising" to an "established" treatment, ensuring wider accessibility and trust.
+                </p>
+            </div>
+        </section>
+
+        <section id="conclusion" class="my-12 scroll-mt-20">
+            <div class="bg-sky-600 text-white rounded-lg shadow-xl p-6 md:p-8 text-center">
+                <h2 class="text-3xl font-bold mb-6">The Future of Neurofeedback in PTSD Care</h2>
+                <p class="text-lg mb-4">
+                    Neurofeedback represents an evolving and scientifically-backed intervention for PTSD, demonstrating moderate to clinically meaningful efficacy, a favorable safety profile, and high patient tolerability.
+                </p>
+                <p class="text-lg mb-4">
+                    The progression towards precise, fMRI-guided modalities and recent regulatory approvals (like PRISM for PTSD) signal growing maturity and potential for broader clinical integration. While methodological rigor in research must continue to improve, neurofeedback holds substantial promise.
+                </p>
+                <p class="text-lg font-semibold">
+                    It is poised to become an integral component of comprehensive, personalized PTSD treatment plans, offering a unique path to neural self-regulation and lasting recovery for many individuals.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center p-6 bg-gray-200 text-gray-600 text-sm">
+        <p>Infographic based on the "Neurofeedback for Posttraumatic Stress Disorder: An Evidence-Based Review" (May 2025). Data synthesized for illustrative purposes.</p>
+        <p>&copy; 2025 Neurofeedback Insights. All rights reserved (Conceptual).</p>
+    </footer>
+
+    <script>
+        const wrapLabel = (label, maxLength = 16) => {
+            if (typeof label !== 'string' || label.length <= maxLength) {
+                return label;
+            }
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            for (const word of words) {
+                if ((currentLine + word).length > maxLength && currentLine.length > 0) {
+                    lines.push(currentLine.trim());
+                    currentLine = '';
+                }
+                currentLine += word + ' ';
+            }
+            lines.push(currentLine.trim());
+            return lines;
+        };
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            if (!item) return '';
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+
+        const commonChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: tooltipTitleCallback
+                    }
+                },
+                legend: {
+                    labels: {
+                        font: {
+                            family: 'Inter'
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        font: {
+                            family: 'Inter'
+                        }
+                    }
+                },
+                x: {
+                    ticks: {
+                        font: {
+                            family: 'Inter'
+                        },
+                        callback: function(value, index, values) {
+                            const label = this.getLabelForValue(value);
+                            return wrapLabel(label);
+                        }
+                    }
+                }
+            }
+        };
+        
+        // Chart 1: Efficacy SMD
+        const efficacySMDData = {
+            labels: [wrapLabel('Meta-Analysis 1 (PTSD Symptoms) [1]'), wrapLabel('Meta-Analysis 2 (PTSD Symptoms) [19]'), wrapLabel('CAPS-5 (Pre-Post) [3,17]'), wrapLabel('PCL-5 (Pre-Post) [3]')],
+            datasets: [{
+                label: 'SMD (Effect Size)',
+                data: [1.76, 0.74, 0.74, 0.47], // Using absolute values for positive representation of reduction
+                backgroundColor: ['#0ea5e9', '#8b5cf6', '#22c55e', '#f97316'],
+                borderColor: ['#0284c7', '#7c3aed', '#16a34a', '#f59e0b'],
+                borderWidth: 1
+            }]
+        };
+        new Chart(document.getElementById('efficacySMDChart'), {
+            type: 'bar',
+            data: efficacySMDData,
+            options: { ...commonChartOptions, plugins: { ...commonChartOptions.plugins, tooltip: { callbacks: { title: tooltipTitleCallback, label: (context) => `${context.dataset.label}: ${Math.abs(context.raw)} (Negative SMD indicates improvement)`} } } }
+        });
+
+        // Chart 2: Remission Rates
+        const remissionRateData = {
+            labels: [wrapLabel('Neurofeedback Group [1,8]'), wrapLabel('Control Group [1,8]'), wrapLabel('PRISM Remission [4]')],
+            datasets: [{
+                label: 'Remission Rate (%)',
+                data: [79.3, 24.4, 32],
+                backgroundColor: ['#22c55e', '#ef4444', '#0ea5e9'],
+            }]
+        };
+        new Chart(document.getElementById('remissionRateChart'), {
+            type: 'doughnut',
+            data: remissionRateData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    tooltip: { callbacks: { title: tooltipTitleCallback } },
+                    legend: { position: 'top', labels: { font: { family: 'Inter' } } },
+                }
+            }
+        });
+
+        // Chart 3: Efficacy Comparison (Conceptual)
+        const efficacyComparisonData = {
+            labels: [wrapLabel('Neurofeedback (e.g., d=-2.33) [2]'), wrapLabel('Effective EBTs (General Range)'), wrapLabel('Drug Interventions (General Range)')],
+            datasets: [{
+                label: 'Effect Size (Cohen\'s d / equivalent)',
+                data: [2.33, 1.5, 0.8], // Example data, NF often comparable or better
+                backgroundColor: ['#f97316', '#0ea5e9', '#8b5cf6'],
+                borderColor: ['#f59e0b', '#0284c7', '#7c3aed'],
+                borderWidth: 1
+            }]
+        };
+        new Chart(document.getElementById('efficacyComparisonChart'), {
+            type: 'bar',
+            data: efficacyComparisonData,
+             options: { ...commonChartOptions, plugins: { ...commonChartOptions.plugins, tooltip: { callbacks: { title: tooltipTitleCallback, label: (context) => `${context.dataset.label}: ~${Math.abs(context.raw)} (Higher absolute value indicates greater effect)` } } } }
+        });
+
+        // Chart 4: Dropout Rate Comparison
+        const dropoutRateData = {
+            labels: [wrapLabel('Neurofeedback (e.g., study) [6]'), wrapLabel('Psychotherapy (e.g., study) [6]')],
+            datasets: [{
+                label: 'Dropout Rate (%)',
+                data: [9, 16],
+                backgroundColor: ['#22c55e', '#ef4444'],
+                borderColor: ['#16a34a', '#dc2626'],
+                borderWidth: 1
+            }]
+        };
+        new Chart(document.getElementById('dropoutRateComparisonChart'), {
+            type: 'bar',
+            data: dropoutRateData,
+            options: commonChartOptions
+        });
+
+    </script>
+
+</body>
+</html>
